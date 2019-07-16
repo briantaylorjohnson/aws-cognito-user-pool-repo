@@ -50,10 +50,12 @@
 			        console.log('You are now logged in.');
 
 			        // Add the User's Id Token to the Cognito credentials login map.
-                    AWS.config.region = 'us-east-1';
+                    //AWS.config.region = 'us-east-1';
+
+                    AWS.config.update({region:'us-east-1'});
 			        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 				        IdentityPoolId: 'arn:aws:iam::907421985746:role/cognito_rekognition_auth_role',
-                        Region: 'us-east-1',
+
 				        Logins: {
 					        'cognito-idp.us-east-1.amazonaws.com/us-east-1_mBzAEpudZ': result.getIdToken().getJwtToken()
 				        }
