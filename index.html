@@ -16,6 +16,22 @@
         <script src="aws-cognito-sdk.min.js"></script>
         <script>
 
+            var data = {
+                UserPoolId : 'us-east-1_mBzAEpudZ',
+                ClientId : 'bsafk1dd2tkcnjdqnsg36dld2'
+            };
+            
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+            var cognitoUser = userPool.getCurrentUser();
+            if (cognitoUser != null) {
+                cognitoUser.getSession(function(err, session) {
+                if (err) {
+                    alert(err);
+                return;
+                }
+                console.log('session validity: ' + session.isValid());
+                });
+            }
             var cognitoUser = userPool.getCurrentUser();
 
             if (cognitoUser != null) {
