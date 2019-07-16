@@ -15,16 +15,24 @@
         <script src="amazon-cognito-identity.min.js"></script>
         <script src="aws-cognito-sdk.min.js"></script>
         <script>
-            var poolData = {
-                UserPoolId : 'us-east-1_mBzAEpudZ', // your user pool id here
-                ClientId : 'bsafk1dd2tkcnjdqnsg36dld2' // your app client id here
-            };
-            var userPool = 
-            new AmazonCognitoIdentity.CognitoUserPool(poolData);
-            var userData = {
-                Username : '...', // your username here
-                Pool : userPool
-};
+                var data = { UserPoolId : 'us-east-1_mBzAEpudZ',
+                    ClientId : 'bsafk1dd2tkcnjdqnsg36dld2'
+                };
+                var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+                var cognitoUser = userPool.getCurrentUser();
+
+                if (cognitoUser != null) {
+                    cognitoUser.getSession(function(err, session) {
+                    if (err) {
+                            alert(err);
+                            return;
+                     }
+                        console.log('session validity: ' + session.isValid());
+                     });
+                    }
+            
+            
+                        
         </script>
     </body>
 </html>
